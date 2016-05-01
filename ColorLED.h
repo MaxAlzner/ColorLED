@@ -7,20 +7,44 @@
 #include "WProgram.h"
 #endif
 
+/// <summary>
+/// Provides methods for interfacing with a 3-channel RGB LED.
+/// </summary>
 class ColorLED
 {
 public:
 
+	/// <param name="redPin">Pin for the LED's red channel.</param>
+	/// <param name="greenPin">Pin for the LED's green channel.</param>
+	/// <param name="bluePin">Pin for the LED's blue channel.</param>
 	inline ColorLED(const byte redPin, const byte greenPin, const byte bluePin) :
 		_redPin(redPin), _greenPin(greenPin), _bluePin(bluePin) {}
 
+	/// <summary>
+	/// Initializes the connection to the LED.
+	/// </summary>
 	inline void begin();
 
+	/// <summary>
+	/// Sets RGB (red, green, blue) values for the LED's color.
+	/// </summary>
+	/// <param name="red">0-255 value, 0 being black and 255 being maximum red.</param>
+	/// <param name="green">0-255 value, 0 being black and 255 being maximum green.</param>
+	/// <param name="blue">0-255 value, 0 being black and 255 being maximum blue.</param>
 	inline void rgb(const byte red, const byte green, const byte blue);
+	/// <summary>
+	/// Sets HSL (hue, saturation, lightness) values for the LED's color.
+	/// </summary>
+	/// <param name="hue">0-360 value shifting through the entire color spectrum.</param>
+	/// <param name="saturation">0-100 value, 0 being gray and 100 being maximum hue.</param>
+	/// <param name="lightness">0-100 value, 0 being black, 100 being white, and 50 being maximum hue.</param>
 	inline void hsl(const word hue, const byte saturation, const byte lightness);
 
 protected:
 
+	/// <summary>
+	/// Preforms calculation for a HSL channel.
+	/// </summary>
 	inline double _hsl_channel(const double p, const double q, double t);
 
 	byte _redPin, _greenPin, _bluePin;
